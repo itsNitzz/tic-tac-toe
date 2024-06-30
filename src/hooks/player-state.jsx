@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-let initialGameBoard = [
+const initialGameBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -56,7 +56,7 @@ export default function usePlayer() {
 
   let activePlayer = derivedActivePlayer(playerTurn);
 
-  let gameBoard = initialGameBoard;
+  let gameBoard = [...initialGameBoard.map((inner) => [...inner])];
 
   for (let turn of playerTurn) {
     !gameBoard[turn.square.row][turn.square.col] &&
@@ -79,11 +79,6 @@ export default function usePlayer() {
 
   function reset() {
     setPlayerTurn([]);
-    initialGameBoard = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ];
   }
 
   return [
